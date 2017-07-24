@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>webpack-simple</title>
+    <link rel="icon" href="/favicon.ico">
+    <!--<link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet" type="text/css">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet" type="text/css">
+    <!--<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">-->
+
+    <style>
+      [v-cloak] > * { display:none; }
+      [v-cloak]::before { content: "Loading..."; }
+
+      .fade-enter-active, .fade-leave-active {
+        transition: opacity 0.5s
+      }
+      .fade-enter, .fade-leave-to{
+        opacity: 0
+      }
+      .fade-enter-to, .fade-leave {
+        opacity: 1
+      }
+
+      v-toolbar{
+        z-index: 999;
+      }
+
+    </style>
+
+  </head>
+  <body>
+
+    <div id="app" class="v-container" v-cloak>
+
+      <v-app id="example-2" standalone>
+        <v-navigation-drawer persistent light :mini-variant.sync="mini" v-model="drawer" overflow style="z-index: 99999">
+          <v-toolbar flat class="transparent">
+            <v-list class="pa-0">
+              <v-list-tile avatar tag="div">
+                <v-list-tile-avatar>
+                  <img src="https://randomuser.me/api/portraits/men/85.jpg" />
+                </v-list-tile-avatar>
+                <v-list-tile-content>
+                  <v-list-tile-title>John Leider</v-list-tile-title>
+                </v-list-tile-content>
+                <v-list-tile-action>
+                  <v-btn icon @click.native.stop="mini = !mini">
+                    <v-icon>chevron_left</v-icon>
+                  </v-btn>
+                </v-list-tile-action>
+              </v-list-tile>
+            </v-list>
+          </v-toolbar>
+          <v-list class="pt-0" dense>
+            <v-divider></v-divider>
+            <v-list-tile v-for="item in items" :key="item.title" @click="changePath(item.path)">
+              <v-list-tile-action>
+                <v-icon>{{ item.icon }}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-navigation-drawer>
+        <v-toolbar fixed class="indigo darken-4" dark style="z-index: 9999">
+          <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+          <v-toolbar-title>Toolbar</v-toolbar-title>
+        </v-toolbar>
+        <main>
+            <transition :duration="200" name="fade" mode="out-in">
+              <keep-alive>
+                <router-view></router-view>
+              </keep-alive>
+            </transition>
+
+        </main>
+      </v-app>
+
+
+    </div>
+
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>-->
+    <script src="/dist/build.js"></script>
+  </body>
+</html>
